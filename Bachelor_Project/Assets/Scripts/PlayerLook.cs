@@ -6,10 +6,17 @@ public class PlayerLook : MonoBehaviour
 {
     [SerializeField] private string mouseXInputName, mouseYInputName;
     [SerializeField] private float mouseSensitivity;
+    [SerializeField] private Transform playerBody;
 
-    [SerializeField] private Transform playerBody; 
+    private float xAxisClamp;
+    public bool disabled;
 
-    private float xAxisClamp; 
+
+
+    private void Start()
+    {
+        disabled = false; 
+    }
 
     private void Awake()
     {
@@ -24,7 +31,10 @@ public class PlayerLook : MonoBehaviour
 
     private void Update()
     {
-        CameraRotation(); 
+        if(!disabled)
+        {
+            CameraRotation();
+        }
     }
 
     private void CameraRotation()
@@ -57,5 +67,11 @@ public class PlayerLook : MonoBehaviour
         Vector3 eulerRotation = transform.eulerAngles;
         eulerRotation.x = value;
         transform.eulerAngles = eulerRotation; 
+    }
+
+    public bool FlipDisabled()
+    {
+        disabled = !disabled;
+        return disabled;  
     }
 }

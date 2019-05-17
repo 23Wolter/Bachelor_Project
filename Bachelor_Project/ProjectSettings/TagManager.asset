@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactive
+  - Interactable
+  - Left door
+  - Right door
+  - DogFood
+  - Interactable0
+  - DogBowl
   layers:
   - Default
   - TransparentFX

@@ -6,18 +6,30 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private string horizontalInputName;
     [SerializeField] private string verticalInputName;
-    [SerializeField] private float movementSpeed; 
+    [SerializeField] private float movementSpeed;
 
     private CharacterController charController;
+    private bool isHoldingItem;
+    private bool disabled; 
 
     private void Awake()
     {
-        charController = GetComponent<CharacterController>(); 
+        charController = GetComponent<CharacterController>();
+        disabled = false; 
+    }
+
+
+    private void Start()
+    {
+        isHoldingItem = false; 
     }
 
     private void Update()
     {
-        PlayerMovement(); 
+        if(!disabled)
+        {
+            PlayerMovement();
+        }
     }
 
     private void PlayerMovement()
@@ -29,5 +41,28 @@ public class PlayerMove : MonoBehaviour
         Vector3 rightMovement = transform.right * horInput;
 
         charController.SimpleMove(forwardMovement + rightMovement); 
+    }
+
+
+    public void HoldItem()
+    {
+        isHoldingItem = true; 
+    }
+
+    public void ReleaseItem()
+    {
+        isHoldingItem = false; 
+    }
+
+
+    public bool IsHoldingItem()
+    {
+        return isHoldingItem; 
+    }
+
+
+    public void FlipDisabled()
+    {
+        disabled = !disabled; 
     }
 }
